@@ -46,7 +46,7 @@ class _SplashViewState extends State<SplashView> {
 
   void goToOnBordingScreen() {
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, PagesRoutesName.register);
+      Navigator.pushReplacementNamed(context, PagesRoutesName.onBoarding);
     });
   }
 }

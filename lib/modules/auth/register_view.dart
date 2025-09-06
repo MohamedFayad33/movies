@@ -43,7 +43,7 @@ class _RegisterViewState extends State<RegisterView> {
         ),
         leading: IconButton(
           onPressed: () {
-            // Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back, color: ColorPallete.buttonBackGround),
         ),
