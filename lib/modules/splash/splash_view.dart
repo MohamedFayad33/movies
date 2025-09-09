@@ -15,13 +15,13 @@ class _SplashViewState extends State<SplashView> {
   double height = 30;
   double width = 30;
 
-  @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-    await Future.delayed(Duration(milliseconds: 2000));
-    startAnimation();
-    goToOnBordingScreen();
-  }
+  // @override
+  // void didChangeDependencies() async {
+  //   super.didChangeDependencies();
+  //   await Future.delayed(Duration(milliseconds: 2000));
+  //   startAnimation();
+  //   goToOnBordingScreen();
+  // }
 
   @override
   Widget build(BuildContext context) {
