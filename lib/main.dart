@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Movies',
       theme: ThemeManager.theme,
-      initialRoute: PagesRoutesName.splash,
+      initialRoute: PagesRoutesName.layout,
       routes: Routes.routes,
     );
   }

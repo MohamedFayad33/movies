@@ -27,10 +27,15 @@ abstract class Assets {
   static const String avatar9 = 'assets/images/avatar9.png';
   static const String login = 'assets/images/login.png';
   static const String icongoogle = 'assets/images/🦆 icon _google_.png';
-  static const String forgetpassword =
-      'assets/images/Forgot password-bro 1.png';
+  static const String forgetpassword = 'assets/images/Forgot password-bro 1.png';
   static const String homeIcon = 'assets/icons/home_icon.png';
   static const String searchIcon = 'assets/icons/search_icon.png';
   static const String browseIcon = 'assets/icons/browse_icon.png';
   static const String profileIcon = 'assets/icons/profile_icon.png';
-}
+  static const String homeBackground = "assets/images/home_background.png";
+  static const String film1 = "assets/images/film1.png";
+  static const String film2 = "assets/images/film2.jpg";
+  static const String film3 = "assets/images/film3.jpg";
+  static const String poster1 = "assets/images/Poster_film1.jpg";
+  static const String poster2 = "assets/images/Poster_film2.jpg";
+  static const String poster3 = "assets/images/Poster_film3.jpg";}

@@ -11,5 +11,4 @@ class Strings {
   static String onBoardingDescription3 = "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.";
   static String onBoardingDescription4 = "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.";
   static String onBoardingDescription5 = "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.";
-
 }

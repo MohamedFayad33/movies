@@ -5,4 +5,5 @@ abstract class PagesRoutesName {
   static const String register = '/register';
   static const String forget = 'forget';
   static const String layout = 'layout';
+  static const String action = "/action";
 }

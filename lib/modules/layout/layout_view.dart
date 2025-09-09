@@ -13,11 +13,11 @@ class LayoutView extends StatefulWidget {
 }
 
 class _LayoutViewState extends State<LayoutView> {
-  List<Widget> screens = const [
+  List<Widget> screens = [
     HomeView(),
-    SearchView(),
-    BrowseView(),
-    ProfileView(),
+    const SearchView(),
+    const BrowseView(),
+    const ProfileView(),
   ];
   int selectedScreen = 0;
   @override
