@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
 import 'package:movies_app/modules/layout/browse/browse_view.dart';
-import 'package:movies_app/modules/layout/home/home_view.dart';
+import 'package:movies_app/modules/layout/home/presentation/view/home_view.dart';
 import 'package:movies_app/modules/layout/profile/profile_view.dart';
 import 'package:movies_app/modules/layout/search/search_view.dart';
 

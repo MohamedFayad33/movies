@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Movies',
         theme: ThemeManager.theme,
-        initialRoute: PagesRoutesName.login,
+        initialRoute: PagesRoutesName.layout,
         routes: Routes.routes,
       ),
     );
