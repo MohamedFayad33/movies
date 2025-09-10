@@ -16,4 +16,13 @@ class ApiService {
     );
     return response;
   }
+
+  Future<http.Response> getMovies() async {
+    http.Response response = await http.get(
+      Uri.parse(ApiConstant.baseMovieUrl),
+
+      headers: {'Content-Type': 'application/json'},
+    );
+    return response;
+  }
 }

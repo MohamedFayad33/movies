@@ -6,7 +6,11 @@ class ActionMovies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white,centerTitle: true,title: Text("Action Movies",style: TextStyle(color: Colors.red),),),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text("Action Movies", style: TextStyle(color: Colors.red)),
+      ),
       backgroundColor: Colors.orange,
     );
   }

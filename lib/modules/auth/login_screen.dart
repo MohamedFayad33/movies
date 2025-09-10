@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/api_service/api_endpoint.dart';
 import 'package:movies_app/core/routes/pages_routes_name.dart';
+import 'package:movies_app/core/routes/route.dart';
 import 'package:movies_app/core/widgets/change_language_widget.dart';
 import 'package:movies_app/core/widgets/cusotm_snack_bar.dart';
 import 'package:movies_app/core/widgets/custom_show_dialog.dart';
@@ -60,9 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ScaffoldMessenger.of(context).showSnackBar(snack);
         }
         if (state is LoginSuccess) {
-          Navigator.of(context).pop();
-          var snack = customSnackBar(message: 'Account created successfully');
-          ScaffoldMessenger.of(context).showSnackBar(snack);
+          Navigator.of(
+            context,
+          ).pushNamedAndRemoveUntil(PagesRoutesName.layout, (_) => false);
         }
       },
       child: Scaffold(
