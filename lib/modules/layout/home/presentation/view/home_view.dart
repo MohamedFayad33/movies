@@ -4,8 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/api_service/api_service.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
-import 'package:movies_app/modules/layout/home/data/data_source/remote_data_source.dart';
-import 'package:movies_app/modules/layout/home/data/repo/movies_repo.dart';
 import 'package:movies_app/modules/layout/home/domin/entities/movie.dart';
 import 'package:movies_app/modules/layout/home/presentation/manger/bloc/available_now_bloc.dart';
 import 'package:movies_app/modules/layout/home/presentation/view/home_data.dart';
