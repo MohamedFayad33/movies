@@ -11,6 +11,10 @@ import 'package:movies_app/modules/auth/domain/use_cases/login_use_case.dart';
 import 'package:movies_app/modules/auth/domain/use_cases/register_use_case.dart';
 import 'package:movies_app/modules/auth/presentaion/manger/login_bloc/bloc/login_bloc.dart';
 import 'package:movies_app/modules/auth/presentaion/manger/register_bloc/register_bloc.dart';
+import 'package:movies_app/modules/layout/home/data/data_source/remote_data_source.dart';
+import 'package:movies_app/modules/layout/home/data/repo/movies_repo.dart';
+import 'package:movies_app/modules/layout/home/domin/use_cases/fetch_available_use_case.dart';
+import 'package:movies_app/modules/layout/home/presentation/manger/bloc/available_now_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +29,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        ////  refactor with get it  ////
+        BlocProvider(
+          create: (context) => AvailableNowBloc(
+            FetchAvailableUseCase(
+              MoviesRepoImpl(MovieRemoteDataSourceImp(ApiService())),
+            ),
+          )..add(FetchAvailableNowEvent()),
+        ),
         BlocProvider(
           create: (context) => RegisterBloc(
             RegisterUseCase(
@@ -50,7 +62,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Movies',
         theme: ThemeManager.theme,
-        initialRoute: PagesRoutesName.layout,
+        initialRoute: PagesRoutesName.splash,
         routes: Routes.routes,
       ),
     );

@@ -24,18 +24,22 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
       });
     });
   }
+
   @override
   void dispose() {
     pageController.dispose;
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorPallete.primaryColor,
       body: PageView(
         controller: pageController,
-        children: List.generate(OnBoardingData.onBoardingList.length, (index) => OnBoardingPage(
+        children: List.generate(
+          OnBoardingData.onBoardingList.length,
+          (index) => OnBoardingPage(
             onBoardingData: OnBoardingData.onBoardingList[index],
             index: index,
             controller: pageController,
@@ -45,4 +49,3 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
     );
   }
 }
-
