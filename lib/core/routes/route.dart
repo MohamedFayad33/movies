@@ -3,6 +3,8 @@ import 'package:movies_app/core/routes/pages_routes_name.dart';
 import 'package:movies_app/modules/auth/forget_password_screen.dart';
 import 'package:movies_app/modules/auth/login_screen.dart';
 import 'package:movies_app/modules/auth/register_view.dart';
+import 'package:movies_app/modules/layout/home/presentation/view/action_movies.dart';
+import 'package:movies_app/modules/layout/home/presentation/view/home_view.dart';
 import 'package:movies_app/modules/layout/layout_view.dart';
 import 'package:movies_app/modules/onBoarding_view/on_boarding_screen_view.dart';
 import 'package:movies_app/modules/splash/splash_view.dart';
@@ -15,5 +17,7 @@ abstract class Routes {
     PagesRoutesName.forget: (context) => const ForgetPasswordScreen(),
     PagesRoutesName.register: (context) => const RegisterView(),
     PagesRoutesName.layout: (context) => const LayoutView(),
+    PagesRoutesName.action: (context) => const ActionMovies(),
+    PagesRoutesName.home: (context) => const HomeView(),
   };
 }
