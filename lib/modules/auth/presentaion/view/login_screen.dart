@@ -7,10 +7,10 @@ import 'package:movies_app/core/widgets/cusotm_snack_bar.dart';
 import 'package:movies_app/core/widgets/custom_show_dialog.dart';
 import 'package:movies_app/modules/auth/data/models/login_user.dart';
 import 'package:movies_app/modules/auth/presentaion/manger/login_bloc/bloc/login_bloc.dart';
-import '../../core/constant/assets/assets.dart';
-import '../../core/theme/color_pallete.dart';
-import '../../core/widgets/custom_button.dart';
-import '../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/constant/assets/assets.dart';
+import '../../../../core/theme/color_pallete.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

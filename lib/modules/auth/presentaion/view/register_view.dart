@@ -11,7 +11,7 @@ import 'package:movies_app/core/widgets/custom_show_dialog.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/modules/auth/data/models/register_user.dart';
 import 'package:movies_app/modules/auth/presentaion/manger/register_bloc/register_bloc.dart';
-import 'package:movies_app/modules/auth/widgets/custom_carouse_slider.dart';
+import 'package:movies_app/modules/auth/presentaion/widgets/custom_carouse_slider.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});

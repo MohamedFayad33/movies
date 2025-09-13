@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constant/assets/assets.dart';
-import '../../core/theme/color_pallete.dart';
-import '../../core/widgets/custom_button.dart';
-import '../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/constant/assets/assets.dart';
+import '../../../../core/theme/color_pallete.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
