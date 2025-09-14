@@ -4,6 +4,7 @@ import 'package:movies_app/core/api_service/api_endpoint.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
 import 'package:movies_app/core/routes/pages_routes_name.dart';
 import 'package:movies_app/core/theme/color_pallete.dart';
+import 'package:movies_app/core/widgets/app_validator.dart';
 import 'package:movies_app/core/widgets/change_language_widget.dart';
 import 'package:movies_app/core/widgets/cusotm_snack_bar.dart';
 import 'package:movies_app/core/widgets/custom_button.dart';
@@ -50,8 +51,23 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   GlobalKey<FormState> mykey = GlobalKey<FormState>();
-  onSave() {
-    if (mykey.currentState!.validate()) {}
+  void onSave() {
+    if (mykey.currentState!.validate()) {
+      RegisterUser user = RegisterUser(
+        name: name.text,
+        email: email.text,
+        password: password.text,
+        confirmPassword: confirmPassword.text,
+        phone: '+2${phone.text}',
+        avaterId: carouseSliderIndex,
+      );
+      context.read<RegisterBloc>().add(
+        RegisterUserEvent(
+          endPoint: ApiEndpoint.registerEndPoint,
+          registerUser: user.toJson(),
+        ),
+      );
+    }
   }
 
   final List<String> avatars = const [
@@ -107,16 +123,25 @@ class _RegisterViewState extends State<RegisterView> {
                   CustomTextFormField(
                     controller: name,
                     hintText: 'Name',
+                    validator: (val) {
+                      return AppValidators.validateUsername(val);
+                    },
                     prefixIcon: Image.asset(Assets.nameIcon),
                   ),
                   CustomTextFormField(
                     controller: email,
                     hintText: 'Email',
+                    validator: (val) {
+                      return AppValidators.validateEmail(val);
+                    },
                     prefixIcon: Image.asset(Assets.emailIcon),
                   ),
                   CustomTextFormField(
                     controller: password,
                     hintText: 'Password',
+                    validator: (val) {
+                      return AppValidators.validatePassword(val);
+                    },
                     prefixIcon: Image.asset(Assets.passwordIcon),
                     obscureText: !showPassword,
                     suffixIcon: IconButton(
@@ -134,6 +159,12 @@ class _RegisterViewState extends State<RegisterView> {
                   CustomTextFormField(
                     controller: confirmPassword,
                     hintText: 'Confirm Password',
+                    validator: (val) {
+                      return AppValidators.validateConfirmPassword(
+                        val,
+                        password.text,
+                      );
+                    },
                     prefixIcon: Image.asset(Assets.passwordIcon),
                     obscureText: !showConfirmPassword,
                     suffixIcon: IconButton(
@@ -153,25 +184,16 @@ class _RegisterViewState extends State<RegisterView> {
                   CustomTextFormField(
                     controller: phone,
                     hintText: 'Phone Number',
+                    validator: (val) {
+                      return AppValidators.validatePhoneNumber(val);
+                    },
                     prefixIcon: Image.asset(Assets.phoneIcon),
                   ),
                   CustomButton(
                     onPressed: () {
-                      //changes  go to home
-                      RegisterUser user = RegisterUser(
-                        name: name.text,
-                        email: email.text,
-                        password: password.text,
-                        confirmPassword: confirmPassword.text,
-                        phone: '+2${phone.text}',
-                        avaterId: carouseSliderIndex,
-                      );
-                      context.read<RegisterBloc>().add(
-                        RegisterUserEvent(
-                          endPoint: ApiEndpoint.registerEndPoint,
-                          registerUser: user.toJson(),
-                        ),
-                      );
+                      //  changes  go to home
+
+                      onSave();
                     },
                     child: Text(
                       'Create Account',

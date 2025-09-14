@@ -19,7 +19,6 @@ class _OnBoardingScreenViewState extends State<OnBoardingScreenView> {
     pageController.addListener(() {
       currentIndex = pageController.page!.toInt();
       setState(() {
-        currentIndex = pageController.page!.toInt();
         // if(currentIndex==OnBoardingData.onBoardingList.length-1){Timer(Duration(seconds: 1), (){Navigator.pushReplacementNamed(context, PagesRoutesName.login);});}
       });
     });
