@@ -7,4 +7,5 @@ abstract class PagesRoutesName {
   static const String layout = 'layout';
   static const String action = "/action";
   static const String home = "/home";
+  static const String details = "/details";
 }

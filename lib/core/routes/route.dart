@@ -9,9 +9,9 @@ import 'package:movies_app/modules/auth/presentaion/manger/register_bloc/registe
 import 'package:movies_app/modules/auth/presentaion/view/forget_password_screen.dart';
 import 'package:movies_app/modules/auth/presentaion/view/login_screen.dart';
 import 'package:movies_app/modules/auth/presentaion/view/register_view.dart';
+import 'package:movies_app/modules/layout/details_view.dart';
 import 'package:movies_app/modules/layout/home/domin/use_cases/fetch_available_use_case.dart';
 import 'package:movies_app/modules/layout/home/presentation/manger/bloc/available_now_bloc.dart';
-import 'package:movies_app/modules/layout/home/presentation/view/action_movies.dart';
 import 'package:movies_app/modules/layout/home/presentation/view/home_view.dart';
 import 'package:movies_app/modules/layout/layout_view.dart';
 import 'package:movies_app/modules/onBoarding_view/on_boarding_screen_view.dart';
@@ -40,7 +40,7 @@ abstract class Routes {
             ..add(FetchAvailableNowEvent()),
       child: const LayoutView(),
     ),
-    PagesRoutesName.action: (context) => const ActionMovies(),
     PagesRoutesName.home: (context) => const HomeView(),
+    PagesRoutesName.details: (context) => const DetailsView(),
   };
 }
