@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/api_service/api_service.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
+import 'package:movies_app/core/routes/pages_routes_name.dart';
 import 'package:movies_app/modules/layout/home/domin/entities/movie.dart';
 import 'package:movies_app/modules/layout/home/presentation/manger/bloc/available_now_bloc.dart';
 import 'package:movies_app/modules/layout/home/presentation/view/home_data.dart';
@@ -141,41 +142,46 @@ class HomeMovieItem extends StatelessWidget {
   final MovieEntity movie;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadiusGeometry.circular(16),
-            child: CachedNetworkImage(
-              imageUrl: movie.imageUrl!,
-              placeholder: (context, url) => Container(
-                height: double.infinity,
-                color: Colors.white.withValues(alpha: 0.5),
-                child: Center(child: CircularProgressIndicator()),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pushNamed(PagesRoutesName.details);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(16),
+              child: CachedNetworkImage(
+                imageUrl: movie.imageUrl ?? Assets.film3,
+                placeholder: (context, url) => Container(
+                  height: double.infinity,
+                  color: Colors.white.withValues(alpha: 0.5),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              // Image.network(
+              //   height: 300,
+              //   movie.imageUrl!,
+              //   fit: BoxFit.fill,
+              // ),
             ),
-            // Image.network(
-            //   height: 300,
-            //   movie.imageUrl!,
-            //   fit: BoxFit.fill,
-            // ),
-          ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Container(
-              padding: EdgeInsets.all(6),
-              color: Colors.black54,
-              child: Text(
-                "⭐ ${movie.titleMovie}",
-                style: TextStyle(color: Colors.white),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Container(
+                padding: EdgeInsets.all(6),
+                color: Colors.black54,
+                child: Text(
+                  "⭐ ${movie.titleMovie}",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

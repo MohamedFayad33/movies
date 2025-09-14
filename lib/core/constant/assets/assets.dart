@@ -42,4 +42,11 @@ abstract class Assets {
   static const String poster3 = "assets/images/Poster_film3.jpg";
   static const String watchNowText = "assets/images/watch_now.png";
   static const String availableNowText = "assets/images/available_now_text.png";
+  static const String screenshot1 = 'assets/images/screenShot1.jpg';
+  static const String screenshot2 = 'assets/images/screenShot2.jpg';
+  static const String screenshot3 = 'assets/images/screenShot3.jpg';
+  static const String similarMovies1 = 'assets/images/similarMovies1.png';
+  static const String similarMovies2 = 'assets/images/similarMovies2.jpg';
+  static const String similarMovies3 = 'assets/images/similarMovies3.jpg';
+  static const String similarMovies4 = 'assets/images/similarMovies4.jpg';
 }
