@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/core/helper/shared_preferences/shared_constanse.dart';
+import 'package:movies_app/core/helper/shared_preferences/shared_preferences.dart';
 import 'package:movies_app/core/models/on_boarding_data.dart';
 import 'package:movies_app/core/routes/pages_routes_name.dart';
 import 'package:movies_app/core/theme/color_pallete.dart';
@@ -108,8 +110,13 @@ class OnBoardingPage extends StatelessWidget {
               )
             else if (index == OnBoardingData.onBoardingList.length - 1)
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  await AppSharedPreferences.prefe.setBool(
+                    SharedConstanse.isFirstTime,
+                    true,
+                  );
                   Navigator.pushReplacementNamed(
+                    // ignore: use_build_context_synchronously
                     context,
                     PagesRoutesName.login,
                   );

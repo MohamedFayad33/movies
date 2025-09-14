@@ -23,21 +23,20 @@ class CustomTextFormField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 4),
       margin: EdgeInsets.only(bottom: 24),
-      decoration: BoxDecoration(
-        color: ColorPallete.textFormFieldBackGround,
-        borderRadius: BorderRadius.circular(15),
-      ),
+
       child: TextFormField(
         controller: controller,
         obscureText: obscureText,
         validator: validator,
         style: TextStyle(color: Colors.white, fontSize: 17),
         decoration: InputDecoration(
-          icon: Padding(padding: EdgeInsets.only(left: 10), child: prefixIcon),
+          fillColor: ColorPallete.textFormFieldBackGround,
+          filled: true,
+          prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.white),
-          border: InputBorder.none,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
         ),
       ),
     );

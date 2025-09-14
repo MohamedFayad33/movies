@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
+import 'package:movies_app/core/helper/shared_preferences/shared_constanse.dart';
+import 'package:movies_app/core/helper/shared_preferences/shared_preferences.dart';
 import 'package:movies_app/core/routes/pages_routes_name.dart';
 
 class SplashView extends StatefulWidget {
@@ -45,8 +47,23 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void goToOnBordingScreen() {
+    bool? isFirstTime = AppSharedPreferences.prefe.getBool(
+      SharedConstanse.isFirstTime,
+    );
+
+    String? haveToken = AppSharedPreferences.prefe.getString(
+      SharedConstanse.userToken,
+    );
+
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, PagesRoutesName.onBoarding);
+      Navigator.pushReplacementNamed(
+        context,
+        isFirstTime == null
+            ? PagesRoutesName.onBoarding
+            : haveToken == null
+            ? PagesRoutesName.login
+            : PagesRoutesName.layout,
+      );
     });
   }
 }
