@@ -16,4 +16,6 @@ class Strings {
       "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.";
   static String onBoardingDescription5 =
       "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.";
+  static String descriptionMovie =
+  'Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346';
 }
