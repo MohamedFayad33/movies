@@ -1,5 +1,5 @@
 class MovieEntity {
-  int? idMovie;
+  num? idMovie;
   String? titleMovie;
   num? ratingMovie;
   String? imageUrl;

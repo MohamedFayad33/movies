@@ -9,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppSharedPreferences.init();
   AppDi.init();
+
   runApp(const MyApp());
 }
 

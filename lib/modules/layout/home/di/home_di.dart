@@ -10,11 +10,11 @@ abstract class HomeDi {
       ..registerLazySingleton<MovieRemoteDataSourceImp>(
         () => MovieRemoteDataSourceImp(sl.get<ApiService>()),
       )
-      ..registerLazySingleton<MoviesRepoImpl>(
-        () => MoviesRepoImpl(sl.get<MovieRemoteDataSourceImp>()),
+      ..registerLazySingleton<HomeMoviesRepoImpl>(
+        () => HomeMoviesRepoImpl(sl.get<MovieRemoteDataSourceImp>()),
       )
       ..registerLazySingleton<FetchAvailableUseCase>(
-        () => FetchAvailableUseCase(sl.get<MoviesRepoImpl>()),
+        () => FetchAvailableUseCase(sl.get<HomeMoviesRepoImpl>()),
       );
   }
 }

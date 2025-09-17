@@ -14,7 +14,6 @@ class DetailsView extends StatelessWidget {
         child: Column(
           children: [
             DetailsMovieShow(),
-
             ScreensSimilarSummaryDetails(),
             CastGenresDetails(),
           ],

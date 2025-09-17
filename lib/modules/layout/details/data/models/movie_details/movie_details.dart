@@ -1,9 +1,9 @@
-import 'package:movies_app/modules/layout/home/domin/entities/movie.dart';
+import 'package:movies_app/modules/layout/details/domin/entities/movie_details_entity.dart';
 
 import 'torrent.dart';
 
-class MovieModel extends MovieEntity {
-  num? id;
+class MovieDetails extends MovieDetailsEntity {
+  num id;
   String? url;
   String? imdbCode;
   String? title;
@@ -11,12 +11,12 @@ class MovieModel extends MovieEntity {
   String? titleLong;
   String? slug;
   num? year;
-  num? rating;
+  double? rating;
   num? runtime;
   List<dynamic>? genres;
-  String? summary;
+  num? likeCount;
+  String? descriptionIntro;
   String? descriptionFull;
-  String? synopsis;
   String? ytTrailerCode;
   String? language;
   String? mpaRating;
@@ -25,13 +25,12 @@ class MovieModel extends MovieEntity {
   String? smallCoverImage;
   String? mediumCoverImage;
   String? largeCoverImage;
-  String? state;
   List<Torrent>? torrents;
   String? dateUploaded;
   num? dateUploadedUnix;
 
-  MovieModel({
-    this.id,
+  MovieDetails({
+    required this.id,
     this.url,
     this.imdbCode,
     this.title,
@@ -42,9 +41,9 @@ class MovieModel extends MovieEntity {
     this.rating,
     this.runtime,
     this.genres,
-    this.summary,
+    this.likeCount,
+    this.descriptionIntro,
     this.descriptionFull,
-    this.synopsis,
     this.ytTrailerCode,
     this.language,
     this.mpaRating,
@@ -53,20 +52,22 @@ class MovieModel extends MovieEntity {
     this.smallCoverImage,
     this.mediumCoverImage,
     this.largeCoverImage,
-    this.state,
     this.torrents,
     this.dateUploaded,
     this.dateUploadedUnix,
   }) : super(
-         idMovie: id,
-         imageUrl: largeCoverImage,
-         ratingMovie: rating,
-         titleMovie: title,
+         movieId: id,
+         movieYear: year,
+         movieLikeCount: likeCount,
+         movieRating: rating,
+         movieRuntime: runtime,
+         movieTitle: title,
+         movieGenres: genres,
        );
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) {
-    return MovieModel(
-      id: json['id'] as num?,
+  factory MovieDetails.fromJson(Map<String, dynamic> json) {
+    return MovieDetails(
+      id: json['id'] as int,
       url: json['url'] as String?,
       imdbCode: json['imdb_code'] as String?,
       title: json['title'] as String?,
@@ -74,12 +75,12 @@ class MovieModel extends MovieEntity {
       titleLong: json['title_long'] as String?,
       slug: json['slug'] as String?,
       year: json['year'] as num?,
-      rating: json['rating'] as num?,
+      rating: (json['rating'] as num?)?.toDouble(),
       runtime: json['runtime'] as num?,
       genres: json['genres'] as List<dynamic>?,
-      summary: json['summary'] as String?,
+      likeCount: json['like_count'] as num?,
+      descriptionIntro: json['description_intro'] as String?,
       descriptionFull: json['description_full'] as String?,
-      synopsis: json['synopsis'] as String?,
       ytTrailerCode: json['yt_trailer_code'] as String?,
       language: json['language'] as String?,
       mpaRating: json['mpa_rating'] as String?,
@@ -88,7 +89,6 @@ class MovieModel extends MovieEntity {
       smallCoverImage: json['small_cover_image'] as String?,
       mediumCoverImage: json['medium_cover_image'] as String?,
       largeCoverImage: json['large_cover_image'] as String?,
-      state: json['state'] as String?,
       torrents: (json['torrents'] as List<dynamic>?)
           ?.map((e) => Torrent.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -110,9 +110,9 @@ class MovieModel extends MovieEntity {
       'rating': rating,
       'runtime': runtime,
       'genres': genres,
-      'summary': summary,
+      'like_count': likeCount,
+      'description_intro': descriptionIntro,
       'description_full': descriptionFull,
-      'synopsis': synopsis,
       'yt_trailer_code': ytTrailerCode,
       'language': language,
       'mpa_rating': mpaRating,
@@ -121,7 +121,6 @@ class MovieModel extends MovieEntity {
       'small_cover_image': smallCoverImage,
       'medium_cover_image': mediumCoverImage,
       'large_cover_image': largeCoverImage,
-      'state': state,
       'torrents': torrents?.map((e) => e.toJson()).toList(),
       'date_uploaded': dateUploaded,
       'date_uploaded_unix': dateUploadedUnix,

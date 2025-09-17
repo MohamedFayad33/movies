@@ -17,9 +17,9 @@ class ApiService {
     return response;
   }
 
-  Future<http.Response> getMovies() async {
+  Future<http.Response> getMovies(String endPoint) async {
     http.Response response = await http.get(
-      Uri.parse(ApiConstant.baseMovieUrl),
+      Uri.parse(ApiConstant.baseMovieUrl + endPoint),
 
       headers: {'Content-Type': 'application/json'},
     );

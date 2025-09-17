@@ -13,6 +13,7 @@ class AvailableNowBloc extends Bloc<AvailableNowEvent, AvailableNowState> {
     on<FetchAvailableNowEvent>(fetchAvailableNowEvent);
   }
   final FetchAvailableUseCase fetchAvailableUseCase;
+
   FutureOr<void> fetchAvailableNowEvent(
     FetchAvailableNowEvent event,
     Emitter<AvailableNowState> emit,
