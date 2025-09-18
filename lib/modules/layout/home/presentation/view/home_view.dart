@@ -77,7 +77,6 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-
                 SizedBox(height: 10),
                 SizedBox(
                   height: 300,
@@ -126,7 +125,6 @@ class _HomeViewState extends State<HomeView> {
                     },
                   ),
                 ),
-
                 SizedBox(height: 20),
               ],
             ),
@@ -149,7 +147,7 @@ class HomeMovieItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Stack(
-          fit: StackFit.expand,
+          // fit: StackFit.expand,
           children: [
             ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(16),
