@@ -20,7 +20,6 @@ import 'package:movies_app/modules/layout/home/presentation/manger/bloc/availabl
 import 'package:movies_app/modules/layout/home/presentation/view/home_view.dart';
 import 'package:movies_app/modules/layout/layout_view.dart';
 import 'package:movies_app/modules/layout/details/presentaion/manger/movie_details_bloc.dart';
-import 'package:movies_app/modules/layout/details/presentaion/manger/movie_details_event.dart';
 import 'package:movies_app/modules/onBoarding_view/on_boarding_screen_view.dart';
 import 'package:movies_app/modules/splash/splash_view.dart';
 
@@ -51,21 +50,15 @@ abstract class Routes {
     PagesRoutesName.home: (context) => const HomeView(),
     PagesRoutesName.details: (context) => BlocProvider(
       lazy: false,
-      create: (context) =>
-          MovieDetailsBloc(
-            FetchMovieDetailsUseCase(
-              movieDetailsRepo: MovieDetailRepoImp(
-                remoteMovieDetails: RemoteMovieDetailsImpl(
-                  apiService: ApiService(),
-                ),
-              ),
-            ),
-          )..add(
-            FetchMovieDetailsEvent(
-              endPont: ApiEndpoint.movieDetails,
-              movieId: 2000.toString(),
+      create: (context) => MovieDetailsBloc(
+        FetchMovieDetailsUseCase(
+          movieDetailsRepo: MovieDetailRepoImp(
+            remoteMovieDetails: RemoteMovieDetailsImpl(
+              apiService: ApiService(),
             ),
           ),
+        ),
+      ),
       child: const DetailsView(),
     ),
   };

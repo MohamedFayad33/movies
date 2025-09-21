@@ -2,22 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/core/api_service/api_service.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
 import 'package:movies_app/core/routes/pages_routes_name.dart';
 import 'package:movies_app/modules/layout/home/domin/entities/movie.dart';
 import 'package:movies_app/modules/layout/home/presentation/manger/bloc/available_now_bloc.dart';
 import 'package:movies_app/modules/layout/home/presentation/view/home_data.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  ApiService x = ApiService();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AvailableNowBloc, AvailableNowState>(
@@ -50,8 +43,15 @@ class _HomeViewState extends State<HomeView> {
                   items: state is AvailableNowSuccess
                       ? List.generate(
                           state.myMovies.length,
-                          (index) =>
-                              HomeMovieItem(movie: state.myMovies[index]),
+                          (index) => HomeMovieItem(
+                            movie: state.myMovies[index],
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                PagesRoutesName.details,
+                                arguments: state.myMovies[index].idMovie,
+                              );
+                            },
+                          ),
                         )
                       : [],
                 ),
@@ -77,6 +77,7 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
+
                 SizedBox(height: 10),
                 SizedBox(
                   height: 300,
@@ -136,14 +137,13 @@ class _HomeViewState extends State<HomeView> {
 }
 
 class HomeMovieItem extends StatelessWidget {
-  const HomeMovieItem({super.key, required this.movie});
+  const HomeMovieItem({super.key, required this.movie, required this.onTap});
   final MovieEntity movie;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(context).pushNamed(PagesRoutesName.details);
-      },
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Stack(

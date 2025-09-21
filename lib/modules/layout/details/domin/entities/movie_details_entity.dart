@@ -5,6 +5,7 @@ class MovieDetailsEntity {
   final num? movieRating;
   final num? movieRuntime;
   final num? movieLikeCount;
+  final String? movieImage;
   final List<dynamic>? movieGenres;
 
   MovieDetailsEntity({
@@ -14,6 +15,7 @@ class MovieDetailsEntity {
     required this.movieRating,
     required this.movieRuntime,
     required this.movieLikeCount,
+    required this.movieImage,
     required this.movieGenres,
   });
 }

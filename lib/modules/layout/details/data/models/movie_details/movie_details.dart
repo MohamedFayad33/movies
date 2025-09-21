@@ -63,6 +63,7 @@ class MovieDetails extends MovieDetailsEntity {
          movieRuntime: runtime,
          movieTitle: title,
          movieGenres: genres,
+         movieImage: largeCoverImage,
        );
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) {
