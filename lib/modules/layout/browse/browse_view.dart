@@ -90,11 +90,13 @@ class BrowseView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Stack(
                               children: [
-                                ClipRRect(
+                                InkWell(onTap: (){},
+                                  child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
                                   child: Image.asset(
                                     movies[index]["image"],
                                     fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 Positioned(
