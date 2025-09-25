@@ -1,10 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/constant/assets/assets.dart';
-
 class BrowseView extends StatelessWidget {
   final List<String> categories = ["Action", "Adventure", "Animation", "Biography"];
-
   final List<Map<String, dynamic>> movies = [
     {
       "rating": 7.7,
@@ -31,7 +29,6 @@ class BrowseView extends StatelessWidget {
       "image": Assets.movie6
     }
   ];
-
    BrowseView({super.key});
   
   @override
@@ -50,12 +47,12 @@ class BrowseView extends StatelessWidget {
                   isScrollable: true,
                   labelPadding: EdgeInsets.symmetric(horizontal: 4),
                   indicator: BoxDecoration(
-                    color: Color(0xFFF6BD00), // اللون الأصفر للخلفية النشطة
+                    color: Color(0xFFF6BD00), 
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Color(0xFFF6BD00), width: 3),
                   ),
-                  labelColor: Colors.black, // لون النص للتاب النشط
-                  unselectedLabelColor: Color(0xFFF6BD00), // لون النص للتاب غير النشط
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Color(0xFFF6BD00), 
                   tabs: List.generate(
                     categories.length,
                         (index) => Container(
