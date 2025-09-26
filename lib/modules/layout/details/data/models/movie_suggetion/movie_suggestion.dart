@@ -1,8 +1,8 @@
-import 'package:movies_app/modules/layout/home/domin/entities/movie.dart';
+import 'package:movies_app/modules/layout/details/domin/entities/movie_suggestions_entity.dart';
 
 import 'torrent.dart';
 
-class MovieModel extends MovieEntity {
+class MovieSuggestionModel extends MovieSuggestionsEntity {
   num? id;
   String? url;
   String? imdbCode;
@@ -11,7 +11,7 @@ class MovieModel extends MovieEntity {
   String? titleLong;
   String? slug;
   num? year;
-  num? rating;
+  double? rating;
   num? runtime;
   List<dynamic>? genres;
   String? summary;
@@ -24,13 +24,12 @@ class MovieModel extends MovieEntity {
   String? backgroundImageOriginal;
   String? smallCoverImage;
   String? mediumCoverImage;
-  String? largeCoverImage;
   String? state;
   List<Torrent>? torrents;
   String? dateUploaded;
   num? dateUploadedUnix;
 
-  MovieModel({
+  MovieSuggestionModel({
     this.id,
     this.url,
     this.imdbCode,
@@ -52,49 +51,41 @@ class MovieModel extends MovieEntity {
     this.backgroundImageOriginal,
     this.smallCoverImage,
     this.mediumCoverImage,
-    this.largeCoverImage,
     this.state,
     this.torrents,
     this.dateUploaded,
     this.dateUploadedUnix,
-  }) : super(
-         idMovie: id,
-         imageUrl: largeCoverImage,
-         ratingMovie: rating,
-         titleMovie: title,
-         genresMovie: genres,
-       );
+  }) : super(movieId: id, movieImage: mediumCoverImage, movieRating: rating);
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) {
-    return MovieModel(
-      id: json['id'] as num?,
-      url: json['url'] as String?,
-      imdbCode: json['imdb_code'] as String?,
-      title: json['title'] as String?,
-      titleEnglish: json['title_english'] as String?,
-      titleLong: json['title_long'] as String?,
-      slug: json['slug'] as String?,
-      year: json['year'] as num?,
-      rating: json['rating'] as num?,
-      runtime: json['runtime'] as num?,
-      genres: json['genres'] as List<dynamic>?,
-      summary: json['summary'] as String?,
-      descriptionFull: json['description_full'] as String?,
-      synopsis: json['synopsis'] as String?,
-      ytTrailerCode: json['yt_trailer_code'] as String?,
-      language: json['language'] as String?,
-      mpaRating: json['mpa_rating'] as String?,
-      backgroundImage: json['background_image'] as String?,
-      backgroundImageOriginal: json['background_image_original'] as String?,
-      smallCoverImage: json['small_cover_image'] as String?,
-      mediumCoverImage: json['medium_cover_image'] as String?,
-      largeCoverImage: json['large_cover_image'] as String?,
-      state: json['state'] as String?,
-      torrents: (json['torrents'] as List<dynamic>?)
+  factory MovieSuggestionModel.fromJson(Map<String, dynamic> data) {
+    return MovieSuggestionModel(
+      id: data['id'] as num,
+      url: data['url'] as String?,
+      imdbCode: data['imdb_code'] as String?,
+      title: data['title'] as String?,
+      titleEnglish: data['title_english'] as String?,
+      titleLong: data['title_long'] as String?,
+      slug: data['slug'] as String?,
+      year: data['year'] as num?,
+      rating: (data['rating'] as num?)?.toDouble(),
+      runtime: data['runtime'] as num?,
+      genres: data['genres'] as List<dynamic>?,
+      summary: data['summary'] as String?,
+      descriptionFull: data['description_full'] as String?,
+      synopsis: data['synopsis'] as String?,
+      ytTrailerCode: data['yt_trailer_code'] as String?,
+      language: data['language'] as String?,
+      mpaRating: data['mpa_rating'] as String?,
+      backgroundImage: data['background_image'] as String?,
+      backgroundImageOriginal: data['background_image_original'] as String?,
+      smallCoverImage: data['small_cover_image'] as String?,
+      mediumCoverImage: data['medium_cover_image'] as String?,
+      state: data['state'] as String?,
+      torrents: (data['torrents'] as List<dynamic>?)
           ?.map((e) => Torrent.fromJson(e as Map<String, dynamic>))
           .toList(),
-      dateUploaded: json['date_uploaded'] as String?,
-      dateUploadedUnix: json['date_uploaded_unix'] as num?,
+      dateUploaded: data['date_uploaded'] as String?,
+      dateUploadedUnix: data['date_uploaded_unix'] as int?,
     );
   }
 
@@ -121,7 +112,6 @@ class MovieModel extends MovieEntity {
       'background_image_original': backgroundImageOriginal,
       'small_cover_image': smallCoverImage,
       'medium_cover_image': mediumCoverImage,
-      'large_cover_image': largeCoverImage,
       'state': state,
       'torrents': torrents?.map((e) => e.toJson()).toList(),
       'date_uploaded': dateUploaded,

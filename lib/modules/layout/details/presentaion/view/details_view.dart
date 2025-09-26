@@ -4,6 +4,7 @@ import 'package:movies_app/core/api_service/api_endpoint.dart';
 import 'package:movies_app/modules/layout/details/presentaion/manger/movie_details_bloc.dart';
 import 'package:movies_app/modules/layout/details/presentaion/manger/movie_details_event.dart';
 import 'package:movies_app/modules/layout/details/presentaion/manger/movie_details_state.dart';
+import 'package:movies_app/modules/layout/details/presentaion/manger/movie_suggetiion_bloc/movie_suggestions_bloc.dart';
 import 'package:movies_app/modules/layout/details/presentaion/widgets/cast_genres_details.dart';
 import 'package:movies_app/modules/layout/details/presentaion/widgets/details_movie_show.dart';
 import 'package:movies_app/modules/layout/details/presentaion/widgets/screens_similar_summary_details.dart';
@@ -27,6 +28,12 @@ class _DetailsViewState extends State<DetailsView> {
           movieId: data.toString(),
         ),
       );
+      context.read<MovieSuggestionsBloc>().add(
+        FetchMovieSuggestionsEvent(
+          endPont: ApiEndpoint.movieSuggestions,
+          movieId: data.toString(),
+        ),
+      );
     });
   }
 
@@ -37,15 +44,20 @@ class _DetailsViewState extends State<DetailsView> {
       body: SingleChildScrollView(
         child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
           builder: (context, state) {
-            return Column(
-              children: [
-                if (state is MovieDetailsSuccess)
-                  DetailsMovieShow(movie: state.myMovie),
-
-                ScreensSimilarSummaryDetails(),
-                CastGenresDetails(),
-              ],
-            );
+            if (state is MovieDetailsSuccess) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DetailsMovieShow(movie: state.myMovie),
+                    ScreensSimilarSummaryDetails(movies: []),
+                    CastGenresDetails(movie: state.myMovie),
+                  ],
+                ),
+              );
+            }
+            return Column();
           },
         ),
       ),

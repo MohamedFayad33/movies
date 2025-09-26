@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/core/api_service/api_endpoint.dart';
-import 'package:movies_app/core/api_service/api_service.dart';
 import 'package:movies_app/core/di/app_di.dart';
 import 'package:movies_app/core/routes/pages_routes_name.dart';
 import 'package:movies_app/modules/auth/domain/use_cases/login_use_case.dart';
@@ -11,8 +9,8 @@ import 'package:movies_app/modules/auth/presentaion/manger/register_bloc/registe
 import 'package:movies_app/modules/auth/presentaion/view/forget_password_screen.dart';
 import 'package:movies_app/modules/auth/presentaion/view/login_screen.dart';
 import 'package:movies_app/modules/auth/presentaion/view/register_view.dart';
-import 'package:movies_app/modules/layout/details/data/data_source/remote_movie_details.dart';
-import 'package:movies_app/modules/layout/details/data/repository/movie_detail_repo_imp.dart';
+import 'package:movies_app/modules/layout/details/domin/use_cases/fetch_movie_suggestion.dart';
+import 'package:movies_app/modules/layout/details/presentaion/manger/movie_suggetiion_bloc/movie_suggestions_bloc.dart';
 import 'package:movies_app/modules/layout/details/presentaion/view/details_view.dart';
 import 'package:movies_app/modules/layout/details/domin/use_cases/fetch_movie_details.dart';
 import 'package:movies_app/modules/layout/home/domin/use_cases/fetch_available_use_case.dart';
@@ -44,22 +42,20 @@ abstract class Routes {
       create: (context) =>
           AvailableNowBloc(sl.get<FetchAvailableUseCase>())
             ..add(FetchAvailableNowEvent()),
-
       child: const LayoutView(),
     ),
     PagesRoutesName.home: (context) => const HomeView(),
     PagesRoutesName.details: (context) => BlocProvider(
-      lazy: false,
-      create: (context) => MovieDetailsBloc(
-        FetchMovieDetailsUseCase(
-          movieDetailsRepo: MovieDetailRepoImp(
-            remoteMovieDetails: RemoteMovieDetailsImpl(
-              apiService: ApiService(),
-            ),
-          ),
+      create: (context) =>
+          MovieSuggestionsBloc(sl.get<FetchMovieSuggestionUseCase>()),
+      child: BlocProvider(
+        lazy: false,
+        create: (context) => MovieDetailsBloc(
+          sl.get<FetchMovieDetailsUseCase>(),
+          // sl.get<FetchMovieSuggestionUseCase>(),
         ),
+        child: const DetailsView(),
       ),
-      child: const DetailsView(),
     ),
   };
 }

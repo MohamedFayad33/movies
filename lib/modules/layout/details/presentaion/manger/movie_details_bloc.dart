@@ -12,6 +12,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   }
 
   final FetchMovieDetailsUseCase fetchMovieDetailsUseCase;
+
   FutureOr<void> fetchMovieDetails(
     FetchMovieDetailsEvent event,
     Emitter<MovieDetailsState> emit,
@@ -23,11 +24,9 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
     );
     response.fold(
       (failuer) {
-        print(failuer.errMessage);
         emit(MovieDetailsFaulier(failuer.errMessage));
       },
       (details) {
-        print(details);
         emit(MovieDetailsSuccess(details));
       },
     );

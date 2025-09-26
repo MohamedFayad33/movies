@@ -42,4 +42,8 @@ abstract class Assets {
   static const String poster3 = "assets/images/Poster_film3.jpg";
   static const String watchNowText = "assets/images/watch_now.png";
   static const String availableNowText = "assets/images/available_now_text.png";
+  static const String playVideoIcon = 'assets/icons/play_video.png';
+  static const String heartIcon = 'assets/icons/heart_icon.png';
+  static const String timeIcon = 'assets/icons/time_icon.png';
+  static const String starIcon = 'assets/icons/star_icon.png';
 }
