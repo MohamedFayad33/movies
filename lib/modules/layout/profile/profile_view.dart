@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movies_app/core/constant/assets/assets.dart';
+import 'package:movies_app/core/constant/constant/constant.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
+import 'package:movies_app/modules/layout/home/domin/entities/movie.dart';
+import 'package:movies_app/modules/layout/home/presentation/manger/bloc/available_now_bloc.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -168,6 +172,242 @@ class _ProfileViewState extends State<ProfileView> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HistoryWidget extends StatefulWidget {
+  const HistoryWidget({super.key});
+
+  @override
+  State<HistoryWidget> createState() => _HistoryWidgetState();
+}
+
+class _HistoryWidgetState extends State<HistoryWidget> {
+  @override
+  Widget build(BuildContext context) {
+    List<MovieEntity> movies = context.read<AvailableNowBloc>().myMovies;
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF212121),
+        elevation: 0,
+        toolbarHeight: 96,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.list, color: Colors.amber, size: 26),
+                SizedBox(height: 4),
+                Text(
+                  "Watch List",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+              ],
+            ),
+            SizedBox(width: 120),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.folder, color: Colors.amber, size: 26),
+                SizedBox(height: 4),
+                Text(
+                  "History",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+                SizedBox(height: 4),
+                SizedBox(
+                  width: 40,
+                  child: Divider(thickness: 2, color: Colors.amber),
+                ),
+              ],
+            ),
+          ],
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: GridView.builder(
+          physics: const BouncingScrollPhysics(),
+          itemCount: movies.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 14,
+            childAspectRatio: 122 / 179.584,
+          ),
+          itemBuilder: (context, index) {
+            return MovieCard(movie: movies[index], index: index);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class MovieCard extends StatefulWidget {
+  final MovieEntity movie;
+  final int index;
+
+  const MovieCard({Key? key, required this.movie, required this.index})
+    : super(key: key);
+
+  @override
+  _MovieCardState createState() => _MovieCardState();
+}
+
+class _MovieCardState extends State<MovieCard>
+    with SingleTickerProviderStateMixin {
+  bool isHovered = false;
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.08).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() => isHovered = true);
+        _animationController.forward();
+      },
+      onExit: (_) {
+        setState(() => isHovered = false);
+        _animationController.reverse();
+      },
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: isHovered
+                        ? Colors.amber.withOpacity(0.5)
+                        : Colors.grey[800]!,
+                    width: isHovered ? 2 : 1,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[900],
+                  boxShadow: isHovered
+                      ? [
+                          BoxShadow(
+                            color: Colors.amber.withOpacity(0.3),
+                            blurRadius: 12,
+                            offset: const Offset(0, 6),
+                          ),
+                        ]
+                      : [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      widget.movie.imageUrl ?? Constant.ifImageNull,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return _buildPlaceholder();
+                      },
+                    ),
+
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: 50,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withOpacity(0.6),
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Positioned(
+                      top: 8.0,
+                      left: 8.0,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6.0,
+                          vertical: 3.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              "7.7",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(width: 3),
+                            Icon(Icons.star, color: Colors.amber, size: 11),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildPlaceholder() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.grey[800]!, Colors.grey[900]!],
+        ),
+      ),
+      child: const Center(
+        child: Icon(Icons.movie_outlined, size: 40, color: Colors.white54),
       ),
     );
   }

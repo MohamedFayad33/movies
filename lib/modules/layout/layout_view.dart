@@ -17,7 +17,7 @@ class _LayoutViewState extends State<LayoutView> {
     HomeView(),
     SearchView(),
     BrowseView(),
-    ProfileView(),
+    HistoryWidget(),
   ];
   int selectedScreen = 0;
   @override
